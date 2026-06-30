@@ -9,13 +9,7 @@
 export const topNavItems = [
   { key: 'home', label: '首页', path: '/' },
   { key: 'recommend', label: '申报书', path: '/recommend' },
-  { key: 'summary', label: '总结报告', path: '/summary', children: [
-    { key: 'intro', label: '成果简介', path: '/summary?section=intro' },
-    { key: 'problem', label: '教学问题及方法', path: '/summary?section=problem' },
-    { key: 'innovation', label: '成果创新点', path: '/summary?section=innovation' },
-    { key: 'effect', label: '推广应用效果', path: '/summary?section=effect' },
-    { key: 'awards', label: '曾获奖励情况', path: '/summary?section=awards' }
-  ]},
+  { key: 'summary', label: '总结报告', path: '/summary' },
   { key: 'effect', label: '培养成效', path: '/effect', children: [
     { key: 'teacherCompetition', label: '教师竞赛', path: '/effect?tab=teacherCompetition' },
     { key: 'studentCompetition', label: '学生技能竞赛', path: '/effect?tab=studentCompetition' }

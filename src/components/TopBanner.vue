@@ -3,6 +3,7 @@
     <div class="bnr">
       <div class="bnr-bg-1"></div>
       <div class="bnr-bg-3"></div>
+      <div class="bnr-left-grid"></div>
       <div class="bnr-overlay"></div>
       <div class="bnr-bottom-glow"></div>
       <div class="bnr-flare"></div>
@@ -16,7 +17,6 @@
             />
           </div>
           <div class="bnr-txt">
-            <h1>国家教学成果奖申报</h1>
             <h2>
               红智双融·场景贯通·知行转化：<br />旅游类专业大思政实践育人模式创新与实践
             </h2>
@@ -116,7 +116,7 @@ const isSubActive = (p, q) => {
 <style lang="scss" scoped>
 .bnr {
   position: relative;
-  height: 220px;
+  height: 160px;
   overflow: hidden;
 }
 .bnr-bg-1 {
@@ -135,15 +135,31 @@ const isSubActive = (p, q) => {
 }
 /* 暗红色相叠加（左侧留出明亮区给 logo，右侧覆盖文字区） */
 /* 暗红色相叠加（左侧留出明亮区给 logo，右侧覆盖文字区） */
+.bnr-left-grid {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 36%;
+  background-color: rgba(252, 248, 240, 0.78);
+  background-image:
+    linear-gradient(90deg, rgba(180, 140, 80, 0.28) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(180, 140, 80, 0.28) 1px, transparent 1px);
+  background-size: 28px 28px, 28px 28px;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 60%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 60%, transparent 100%);
+  z-index: 1;
+}
 .bnr-overlay {
   position: absolute; inset: 0; z-index: 2;
   background:
+    /* 左侧暖色柔光（围绕 Logo 的光晕） */
+    radial-gradient(ellipse 320px 130px at 14% 50%, rgba(255,248,232,0.55) 0%, rgba(255,248,232,0.25) 50%, transparent 90%),
+    /* 右侧暗红渐变（保证文字可读） */
     linear-gradient(90deg,
       rgba(80,10,10,0) 0%,
-      rgba(80,10,10,.05) 18%,
-      rgba(80,10,10,.35) 38%,
-      rgba(80,10,10,.55) 60%,
-      rgba(80,10,10,.55) 100%
+      rgba(80,10,10,.05) 20%,
+      rgba(80,10,10,.4) 45%,
+      rgba(80,10,10,.62) 75%,
+      rgba(60,5,5,.7) 100%
     ),
     radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.28) 100%);
 }
@@ -181,26 +197,38 @@ const isSubActive = (p, q) => {
 .bnr-brand {
   position: absolute;
   left: 32px;
-  top: 30%;
+  top: 50%;
   transform: translateY(-50%);
   flex-shrink: 0;
 }
 .bnr-logo {
-  width: clamp(90px, 12vw, 180px); height: auto; object-fit: contain;
+  width: 170px; height: auto; object-fit: contain;
+  filter: drop-shadow(0 0 16px rgba(255,255,255,.4)) drop-shadow(0 4px 10px rgba(0,0,0,.3));
 }
 .bnr-txt {
   text-align: center;
   max-width: 80%;
-  h1 {
-    font-size: clamp(13px, 2vw, 28px); font-weight: 700; line-height: 1.4; letter-spacing: 6px;
-    text-shadow: 0 2px 8px rgba(0,0,0,.4);
-    font-family: var(--font-serif); color: #fff;
-  }
   h2 {
-    font-size: clamp(18px, 3vw, 42px); color: #f7e5b0; font-weight: 400; line-height: 1.2;
-    letter-spacing: 3px; text-shadow: 0 2px 6px rgba(0,0,0,.6);
+    font-size: 36px; color: #fff; font-weight: 400; line-height: 1.25;
+    letter-spacing: 4px;
+    text-shadow:
+      /* 内层深金描边 (1px) */
+      -1px -1px 0 #8b6914,
+      1px -1px 0 #8b6914,
+      -1px 1px 0 #8b6914,
+      1px 1px 0 #8b6914,
+      /* 外层亮金描边 (2px) */
+      -2px -2px 0 #ffd700,
+      2px -2px 0 #ffd700,
+      -2px 2px 0 #ffd700,
+      2px 2px 0 #ffd700,
+      0 -2px 0 #ffd700,
+      0 2px 0 #ffd700,
+      /* 深色投影 + 金色光晕 */
+      0 3px 12px rgba(0,0,0,.8),
+      0 0 16px rgba(255,215,0,.35);
     font-family: "Ma Shan Zheng", "STXingkai", "KaiTi", "楷体", cursive;
-    margin-top: 4px;
+    margin: 0;
   }
 }
 .bnr-gold-line{
@@ -349,8 +377,13 @@ const isSubActive = (p, q) => {
   .bnr-brand {
     left: 20px;
   }
+  .bnr-logo {
+    width: 160px;
+  }
   .bnr-txt {
     max-width: 85%;
+    h1 { font-size: 18px; }
+    h2 { font-size: 30px; }
   }
 
   .nav-btn {
@@ -456,16 +489,23 @@ const isSubActive = (p, q) => {
     top: auto;
     transform: none;
   }
+  .bnr-logo {
+    width: 140px;
+  }
   .bnr-txt {
     max-width: 100%;
+    h2 { font-size: 26px; }
   }
 }
 @media (max-width: 480px) {
   .bnr {
     padding: 20px 10px;
   }
+  .bnr-logo {
+    width: 120px;
+  }
   .bnr-txt {
-    h1 { letter-spacing: 4px; }
+    h2 { font-size: 22px; }
   }
 }
 </style>

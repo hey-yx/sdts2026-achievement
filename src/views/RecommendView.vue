@@ -9,8 +9,8 @@ import { ref } from 'vue'
 import SecondaryLayout from '@/components/SecondaryLayout.vue'
 import ContentLoader from '@/components/ContentLoader.vue'
 
-const si = []
-const key = ref('')
+const si = [{key:'recommend',label:'申报书',path:'/recommend'}]
+const key = ref('recommend')
 </script>
 
 <style lang="scss" scoped>

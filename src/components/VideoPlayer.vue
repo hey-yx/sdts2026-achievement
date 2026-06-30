@@ -4,7 +4,8 @@
     <div class="vdo-fr" :class="{ hide: !!src }">
       <img :src="poster" alt="" />
       <div class="vdo-ol">
-        <div class="play"><span class="tri"/></div>
+        <div v-if="!src" class="no-video">未上传视频</div>
+        <div v-else class="play"><span class="tri"/></div>
       </div>
     </div>
   </div>
@@ -43,6 +44,7 @@ watch(() => props.src, (v) => {
 .vdo-fr.hide{display:none}
 .vdo-ol{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .play{width:64px;height:64px;border:2px solid #fff;background:rgba(0,0,0,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.2s;.tri{width:0;height:0;border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:4px}&:hover{background:var(--red);border-color:var(--red)}}
+.no-video{font-size:18px;color:var(--gold);font-weight:600;letter-spacing:2px;font-family:var(--font-serif);padding:12px 24px;border:1px solid rgba(255,215,140,.3);border-radius:6px;background:rgba(0,0,0,.5)}
 
 .compact{
   .vdo-video{flex:1;width:100%;object-fit:contain;background:#000;min-height:0;aspect-ratio:unset}

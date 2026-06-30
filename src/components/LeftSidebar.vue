@@ -76,7 +76,7 @@ const onClick = (item) => {
   padding:13px 20px 13px 18px;
   font-size:14px;cursor:pointer;color:var(--txt2);
   font-family:var(--font-sans);font-weight:500;
-  transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;
+  transition:all .3s ease;position:relative;
 }
 .sb-ls li::after{
   content:'';position:absolute;bottom:0;left:18px;right:18px;
@@ -95,20 +95,18 @@ const onClick = (item) => {
 
 .sb-ls li:hover{
   color:var(--red);
-  background:linear-gradient(90deg,#fdf8f0 0%,transparent 60%);
-  padding-left:24px
-}
-.sb-ls li:hover .dot{
-  background:var(--gold);
-  transform:scale(1.4);
-  box-shadow:0 0 0 3px rgba(200,164,90,.15)
-}
-.sb-ls li:hover .i{
-  transform:scale(1.15)
+  background:#fdf8f0;
+  padding-left:24px;
 }
 .sb-ls li.on{
   color:var(--red-d);font-weight:700;
   background:linear-gradient(90deg,#fcf5e0 0%,transparent 70%);
+}
+.sb-ls li:hover .dot{
+  background:var(--gold)
+}
+.sb-ls li.on .dot{
+  background:var(--red)
 }
 .sb-ls li.on .dot{
   background:var(--red);
@@ -128,11 +126,11 @@ const onClick = (item) => {
   .sb-ls{
     display:grid;grid-template-columns:1fr;gap:3px;padding:6px;
   }
-  .sb-ls li{padding:10px 12px;font-size:13px;border-radius:4px;gap:6px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .sb-ls li{padding:10px 12px;font-size:13px;gap:6px}
   .sb-ls li::after{display:none}
   .sb-ls li .dot{width:4px;height:4px}
   .sb-ls li .i{width:18px;height:18px}
-  .sb-ls li.on{background:var(--gold-ll)}
+  .sb-ls li.on{background:#fcf5e0}
   @for $i from 1 through 7{.sb-ls li:nth-child(#{$i}){animation-delay:0s}}
 }
 @media(max-width:480px){
