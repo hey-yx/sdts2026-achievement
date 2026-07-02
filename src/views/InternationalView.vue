@@ -13,10 +13,10 @@ import ContentLoader from '@/components/ContentLoader.vue'
 const route = useRoute()
 
 const sections = [
-  { key: 'standard', label: '一、牵头研制国际标准', file: 'standard' },
-  { key: 'exchange', label: '二、拓展国际交流与合作', file: 'exchange' },
-  { key: 'base', label: '三、国际化人才培养基地', file: 'base' },
-  { key: 'beltRoad', label: '四、服务一带一路', file: 'beltRoad' }
+  { key: 'standard', label: '牵头研制国际标准', file: 'standard' },
+  { key: 'exchange', label: '拓展国际交流与合作', file: 'exchange' },
+  { key: 'base', label: '国际化人才培养基地', file: 'base' },
+  { key: 'beltRoad', label: '服务一带一路', file: 'beltRoad' }
 ]
 
 const key = ref(route.query.section || 'standard')

@@ -27,19 +27,17 @@ export const topNavItems = [
     { key: 'partyBuild', label: '党建与产教融合', path: '/media?section=partyBuild' }
   ]},
   { key: 'international', label: '国际认可', path: '/international', children: [
-    { key: 'intlStandard', label: '一、牵头研制国际标准', path: '/international?section=standard' },
-    { key: 'intlExchange', label: '二、拓展国际交流与合作', path: '/international?section=exchange' },
-    { key: 'intlBase', label: '三、国际化人才培养基地', path: '/international?section=base' },
-    { key: 'beltRoad', label: '四、服务一带一路', path: '/international?section=beltRoad' }
+    { key: 'intlStandard', label: '牵头研制国际标准', path: '/international?section=standard' },
+    { key: 'intlExchange', label: '拓展国际交流与合作', path: '/international?section=exchange' },
+    { key: 'intlBase', label: '国际化人才培养基地', path: '/international?section=base' },
+    { key: 'beltRoad', label: '服务一带一路', path: '/international?section=beltRoad' }
   ]},
   { key: 'evidence', label: '其他佐证', path: '/evidence', children: [
-    { key: 'caseLibrary', label: '案例库（案例1-9）', path: '/evidence?filter=caseLibrary' },
+    { key: 'teacher', label: '师资队伍建设', path: '/evidence?filter=teacher' },
     { key: 'cooperation', label: '创新校企合作机制', path: '/evidence?filter=cooperation' },
     { key: 'base', label: '建设产教融合实训基地', path: '/evidence?filter=base' },
-    { key: 'teacher', label: '师资队伍建设', path: '/evidence?filter=teacher' },
-    { key: 'textbook', label: '出版教材著作和论文', path: '/evidence?filter=textbook' },
     { key: 'project', label: '社会服务', path: '/evidence?filter=project' },
-    { key: 'award2025', label: '2025年度优秀理事单位匾额', path: '/evidence?filter=award2025' }
+    { key: 'caseLibrary', label: '案例库', path: '/evidence?filter=caseLibrary' }
   ]}
 ]
 
@@ -170,12 +168,10 @@ export const theoryCategories = [
 ]
 
 export const evidencePDFs = [
-  { key: 'caseLibrary', label: '案例库（案例1-9）' },
+  { key: 'teacher', label: '师资队伍建设' },
   { key: 'cooperation', label: '创新校企合作机制' },
   { key: 'base', label: '建设产教融合实训基地' },
-  { key: 'teacher', label: '师资队伍建设' },
-  { key: 'textbook', label: '出版教材著作和论文' },
   { key: 'project', label: '社会服务' },
-  { key: 'award2025', label: '2025年度优秀理事单位匾额' }
+  { key: 'caseLibrary', label: '案例库' }
 ]
 
