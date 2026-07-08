@@ -40,13 +40,14 @@
           <template v-if="key">
             <ContentLoader />
           </template>
-          <div v-else class="ov-wrap">
+          <div v-else class="ov-wrap" @click="openOverview">
             <h3 class="ov-tit">{{ overview.title }}</h3>
             <div class="ov-bd">
               <p class="ov-p">{{ overview.paragraphs[0] }}</p>
-              <router-link to="/summary?section=intro" class="ov-more">查看更多</router-link>
+              <span class="ov-more">点击展开</span>
             </div>
           </div>
+
         </div>
       </section>
 
@@ -64,6 +65,22 @@
         </div>
       </section>
     </div>
+
+    <Teleport to="body">
+      <Transition name="modal">
+        <div v-if="showOverviewModal" class="modal-overlay" @click.self="closeOverview">
+          <div class="modal-box">
+            <div class="modal-hd">
+              <h3 class="modal-tit">{{ overview.title }}</h3>
+              <button class="modal-close" @click="closeOverview">✕</button>
+            </div>
+            <div class="modal-bd">
+              <PdfViewer src="/docs/intro/intro.pdf" title="成果简介" />
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </main>
 </template>
 
@@ -74,6 +91,7 @@ import LeftSidebar from '@/components/LeftSidebar.vue'
 import ContentLoader from '@/components/ContentLoader.vue'
 import VideoPlayer from '@/components/VideoPlayer.vue'
 import ImageCarousel from '@/components/ImageCarousel.vue'
+import PdfViewer from '@/components/PdfViewer.vue'
 import { overview, leftSidebarItems as leftItems, theoryCategories } from '@/data/content.js'
 
 const route = useRoute()
@@ -85,6 +103,11 @@ const lightboxOpen = ref(false)
 const showTheoryPopup = ref(false)
 const theoryPopupRef = ref(null)
 let theoryTimer = null
+
+const showOverviewModal = ref(false)
+function openOverview() { showOverviewModal.value = true }
+function closeOverview() { showOverviewModal.value = false }
+watch(showOverviewModal, (v) => { document.body.style.overflow = v ? 'hidden' : '' })
 
 const theoryKeys = new Set(['projects', 'papers', 'textbooks'])
 const sidebarModel = computed(() => theoryKeys.has(key.value) ? 'theory' : key.value)
@@ -246,6 +269,7 @@ onMounted(() => {
 
 /* 成果简介卡片 */
 .ov-wrap{background:#fff;border-radius:6px;box-shadow:var(--shadow-sm);overflow:hidden;border:1px solid #ede5dd;transition:box-shadow .3s ease,border-color .3s ease;height:100%;display:flex;flex-direction:column}
+.ov-wrap{cursor:pointer}
 .ov-wrap:hover{box-shadow:0 6px 20px rgba(139,0,0,.12);border-color:var(--gold)}
 .ov-tit{
   font-size:18px;font-weight:700;color:var(--red-d);padding:16px 24px;
@@ -284,6 +308,51 @@ onMounted(() => {
 
 .pop-fade-enter-active,.pop-fade-leave-active{transition:opacity .2s ease,transform .2s ease}
 .pop-fade-enter-from,.pop-fade-leave-to{opacity:0;transform:translateX(-8px)}
+
+/* 成果简介模态框 */
+.modal-overlay{
+  position:fixed;inset:0;z-index:99999;
+  background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;
+  padding:24px;backdrop-filter:blur(3px)
+}
+.modal-box{
+  background:#fff;border-radius:8px;width:95vw;max-width:1100px;
+  height:92vh;max-height:96vh;display:flex;flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative
+}
+.modal-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 24px;border-bottom:2px solid var(--gold);flex-shrink:0
+}
+.modal-tit{
+  font-size:18px;font-weight:700;color:var(--red-d);
+  font-family:var(--font-serif);letter-spacing:2px;margin:0
+}
+.modal-close{
+  width:34px;height:34px;border-radius:50%;border:none;
+  background:var(--red);color:#fff;font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .2s;line-height:1;flex-shrink:0
+}
+.modal-close:hover{background:var(--red-d);transform:rotate(90deg)}
+.modal-bd{
+  flex:1;overflow:hidden;padding:8px
+}
+.modal-bd :deep(.pv){min-height:0;height:100%}
+.modal-bd :deep(.pv-frame){height:100%;min-height:0}
+.modal-enter-active,.modal-leave-active{transition:opacity .25s ease}
+.modal-enter-active .modal-box,.modal-leave-active .modal-box{transition:transform .25s cubic-bezier(.22,1,.36,1),opacity .25s ease}
+.modal-enter-from,.modal-leave-to{opacity:0}
+.modal-enter-from .modal-box{transform:scale(.9) translateY(30px);opacity:0}
+.modal-leave-to .modal-box{transform:scale(.95);opacity:0}
+
+@media(max-width:767px){
+  .modal-overlay{padding:0;align-items:flex-end}
+  .modal-box{width:100vw;height:94vh;border-radius:8px 8px 0 0}
+  .modal-hd{padding:14px 16px}
+  .modal-tit{font-size:16px}
+  .modal-bd{padding:4px}
+}
 
 /* 成果获奖区 */
 .dbar{padding-bottom:32px}
